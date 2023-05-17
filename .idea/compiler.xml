@@ -11,5 +11,10 @@
         <module name="nortal-leap-2022-autumn.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.assignment.nortal-leap-2022-autumn.main" target="17" />
+      <module name="nortal-leap-2022-autumn" target="17" />
+      <module name="nortal-leap-2022-autumn.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

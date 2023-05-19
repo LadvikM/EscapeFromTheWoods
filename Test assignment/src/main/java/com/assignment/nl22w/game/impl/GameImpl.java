@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -19,6 +20,7 @@ public class GameImpl implements Game {
     public int escapeFromTheWoods(Resource resource) throws IOException {
         //		TODO start your journey here
         // Read map
+        int output = -1;
         try {
             InputStream inputStream = resource.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
@@ -54,10 +56,12 @@ public class GameImpl implements Game {
                 row++;
             }
             StartAndExits startAndExits = new StartAndExits();
-            startAndExits.findMyLocation(forestMap);
-
-            startAndExits.findExits(forestMap, numRows, numCols);
-
+            int[] myLocation = startAndExits.findMyLocation(forestMap);
+            List<int[]> exits = startAndExits.findExits(forestMap, numRows, numCols);
+            WayFinder wayFinder = new WayFinder();
+            if (exits.isEmpty()) {
+                output = 0;
+            } else wayFinder.findWayOut(forestMap, myLocation, exits);
 
             reader.close();
             inputStreamReader.close();
@@ -67,7 +71,7 @@ public class GameImpl implements Game {
         }
 
 
-        return -1;
+        return output;
     }
 
 

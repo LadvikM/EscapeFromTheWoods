@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Test assignment.iml" filepath="$PROJECT_DIR$/.idea/Test assignment.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.assignment.nortal-leap-2022-autumn.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.assignment.nortal-leap-2022-autumn.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/nortal-leap-2022-autumn.main.iml" filepath="$PROJECT_DIR$/.idea/modules/nortal-leap-2022-autumn.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nortal-leap-2022-autumn.test.iml" filepath="$PROJECT_DIR$/.idea/modules/nortal-leap-2022-autumn.test.iml" />
     </modules>
   </component>
 </project>

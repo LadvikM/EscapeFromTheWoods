@@ -17,10 +17,9 @@ import java.util.List;
 public class GameImpl implements Game {
 
     @Override
-    public int escapeFromTheWoods(Resource resource) throws IOException {
-        //		TODO start your journey here
-        // Read map
-        int output = -1;
+    public int escapeFromTheWoods(Resource resource) {
+        //TODO start your journey here
+        int output;
         try {
             InputStream inputStream = resource.getInputStream();
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
@@ -33,12 +32,7 @@ public class GameImpl implements Game {
                     numCols = line.length();
                 }
                 numRows++;
-
             }
-            System.out.println("Number of rows:" + numRows);
-            System.out.println("Number of cols:" + numCols);
-
-            // Reset the reader
             reader.close();
             inputStream.close();
             inputStream = resource.getInputStream();
@@ -61,16 +55,19 @@ public class GameImpl implements Game {
             WayFinder wayFinder = new WayFinder();
             if (exits.isEmpty()) {
                 output = 0;
-            } else wayFinder.findWayOut(forestMap, myLocation, exits);
+            } else {
+                output = wayFinder.findWayOut(forestMap, myLocation, exits);
+            }
+
 
             reader.close();
             inputStreamReader.close();
             inputStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            output = 0;
         }
 
-
+        System.out.println("I returned: " + output);
         return output;
     }
 

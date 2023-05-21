@@ -11,15 +11,12 @@ import java.io.*;
 @SpringBootApplication
 public class GameApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SpringApplication.run(GameApplication.class, args);
-		Resource resource = new ClassPathResource("map4.txt");
+		Resource resource = new ClassPathResource("map2.txt");
 		GameImpl game = new GameImpl();
-		try {
-			game.escapeFromTheWoods(resource);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		game.escapeFromTheWoods(resource);
+
 
 	}
 }

@@ -20,9 +20,7 @@ public class WayFinder {
             int stepCount = findShortestPath(forestMap, myLocation, exit);
             steps.add(stepCount);
             minSteps = Collections.min(steps);
-            if (stepCount == -1) {
-                System.out.println("No way out!");
-            } else System.out.println("Shortest way is: " + stepCount);
+
         }
 
         System.out.println("Kõige vähem samme:" + minSteps);
@@ -68,15 +66,13 @@ public class WayFinder {
                         !visited[row][col]) {
                     // mark cell as visited and enqueue it
                     visited[row][col] = true;
-                    queueNode adjecentCell = new queueNode(row, col,current.dist + 1);
+                    queueNode adjecentCell = new queueNode(row, col, current.dist + 1);
                     coordinatesAndDistances.add(adjecentCell);
                 }
             }
         }
-        return -1;
-
+        return 0;
     }
-
 
     // A Data Structure for queue used in BFS
     static class queueNode {

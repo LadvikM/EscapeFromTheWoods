@@ -9,8 +9,6 @@ public class Stringbuilder {
         while (sb.length() != numCols) {
             sb.append(' ');
         }
-
-
         return sb.toString();
     }
 }

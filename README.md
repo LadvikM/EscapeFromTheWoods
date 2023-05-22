@@ -8,11 +8,11 @@ The hours passed while you were so busy that you had not noticed how the sunset 
 One thought that keeps you calm is that you are a DEVELOPER. There must be a solution that you can write to find the fastest way out! Grandma is waiting. Act now!
 
 
-Assignment
+## Assignment
 
 Read the map file from the resources folder and count the least number of steps needed to get out of the forest.
 
-Game rules
+## Game rules
 
 • Find the fastest way out from the forest and return steps count as an answer (output)
 
@@ -22,7 +22,7 @@ Game rules
 
 • If the file is corrupted or there is no exit – return 0
 
-Map Characteristics
+## Map Characteristics
 
 • The map is a rectangular shape
 
@@ -38,7 +38,7 @@ Map Characteristics
 • There could be from 0 to 1000 exits
 To achieve better results, you have several map files that you can test.
 
-Other Requirements
+## Other Requirements
 
 • Keep the code clean and use the best coding practices
 

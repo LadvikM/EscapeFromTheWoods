@@ -1,7 +1,8 @@
 # EscapeFromTheWoods
 Nortal Test Assignment
 
-The escape from the woods
+### The escape from the woods
+
 There is no sweeter person than a grandmother. The autumn came, and you, as her favorite grandchild, are the one who can help her to prepare for the winter. How? She wants to have some mushrooms picked and dried for the most delicious and warm dinner. And, of course, you said yes.
 You go to the forest and see that mushrooms are growing like crazy, and you can bring it all back home to your grandma's house.
 The hours passed while you were so busy that you had not noticed how the sunset started to set. When you realized the darkness was coming, it was already too late to take the same route you came here. The only solution is to find a new road in the forest, which would be the fastest way out. Luckily, grandma gave you the old map of the woods in case you got lost.

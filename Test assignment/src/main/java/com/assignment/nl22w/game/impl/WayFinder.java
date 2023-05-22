@@ -4,13 +4,9 @@ import java.util.*;
 
 public class WayFinder {
 
-    static boolean isValidMove(int row, int col, int rows, int cols) {
-        if ((row >= 0) && (row < rows) &&
-                (col >= 0) && (col < cols)) {
-            return true;
-        }
-        return false;
-
+    static boolean isValidMove(int row, int col, char[][] forestMap, boolean[][] visited) {
+        return (row >= 0) && (row < forestMap.length) && (col >= 0) && (col < forestMap[0].length)
+                && forestMap[row][col] == ' ' && !visited[row][col];
     }
 
     public int findWayOut(char[][] forestMap, int[] myLocation, List<int[]> exits) {
@@ -21,65 +17,50 @@ public class WayFinder {
             steps.add(stepCount);
             minSteps = Collections.min(steps);
         }
-        System.out.println("Kõige vähem samme:" + minSteps);
         return minSteps;
     }
 
     private int findShortestPathToExit(char[][] forestMap, int[] myLocation, int[] exit) {
-        //Map size
-        int rows = forestMap.length;
-        int cols = forestMap[0].length;
-        //Exit coordinates
-        int exitX = exit[0];
-        int exitY = exit[1];
 
-        int[] rowNum = {-1, 0, 0, 1};
-        int[] colNum = {0, -1, 1, 0};
-        boolean[][] visited = new boolean[rows][cols];
-        //Mark starting point as visited
+
+        boolean[][] visited = new boolean[forestMap.length][forestMap[0].length];
         visited[myLocation[0]][myLocation[1]] = true;
-        // Create a queue for BFS
-        Queue<queueNode> coordinatesAndDistances = new LinkedList<>();
-        //Add start coordinates and distance to queue
-        queueNode start = new queueNode(myLocation[0], myLocation[1], 0);
+        Queue<queueContent> coordinatesAndDistances = new LinkedList<>();
+        queueContent start = new queueContent(myLocation[0], myLocation[1], 0);
         coordinatesAndDistances.add(start);
         while (!coordinatesAndDistances.isEmpty()) {
-            queueNode current = coordinatesAndDistances.peek();
-            int x = current.x;
-            int y = current.y;
+            queueContent current = coordinatesAndDistances.peek();
+            int[] currentCoordinates = {current.x, current.y};
             int stepCount = current.dist;
-            //Check whether current coordinates are at exit
-            if (x == exitX && y == exitY) {
+            if (currentCoordinates[0] == exit[0] && currentCoordinates[1] == exit[1]) {
                 return stepCount;
             }
             coordinatesAndDistances.remove();
-            for (int i = 0; i < 4; i++) {
-                int row = x + rowNum[i];
-                int col = y + colNum[i];
-
-                // if adjacent cell is not out of bounds, is not a tree
-                // and not visited yet, enqueue it.
-                if (isValidMove(row, col, rows, cols) &&
-                        forestMap[row][col] == ' ' &&
-                        !visited[row][col]) {
-                    // mark cell as visited and enqueue it
-                    visited[row][col] = true;
-                    queueNode adjecentCell = new queueNode(row, col, current.dist + 1);
-                    coordinatesAndDistances.add(adjecentCell);
-                }
-            }
+            moveToValidAdjacentCell(forestMap, visited, coordinatesAndDistances, current);
         }
         return 0;
     }
 
-    // A Data Structure for queue used in BFS
-    static class queueNode {
-        // The coordinates of a cell and distance to it from start
+    private static void moveToValidAdjacentCell(char[][] forestMap, boolean[][] visited, Queue<queueContent> coordinatesAndDistances, queueContent current) {
+        int[] rowNum = {-1, 0, 0, 1};
+        int[] colNum = {0, -1, 1, 0};
+        for (int i = 0; i < 4; i++) {
+            int newX = current.x + rowNum[i];
+            int newY = current.y + colNum[i];
+            if (isValidMove(newX, newY, forestMap, visited)) {
+                visited[newX][newY] = true;
+                queueContent adjacentCell = new queueContent(newX, newY, current.dist + 1);
+                coordinatesAndDistances.add(adjacentCell);
+            }
+        }
+    }
+
+    static class queueContent {
         int x;
         int y;
         int dist;
 
-        public queueNode(int x, int y, int dist) {
+        public queueContent(int x, int y, int dist) {
             this.x = x;
             this.y = y;
             this.dist = dist;

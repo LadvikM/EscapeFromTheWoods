@@ -11,16 +11,34 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 @Slf4j
 public class GameImpl implements Game {
 
+    private static List<int[]> findAllExits(int numRows, int numCols, char[][] forestMap, StartAndExits startAndExits) {
+        return startAndExits.findExits(forestMap, numRows, numCols);
+    }
+
+    private static int[] findStartLocation(char[][] forestMap, StartAndExits startAndExits) {
+        return startAndExits.findMyLocation(forestMap);
+    }
+
+    private static char[][] create2DForestMap(BufferedReader reader, int numRows, int numCols) throws IOException {
+        String line;
+        char[][] forestMap = new char[numRows][numCols];
+        int row = 0;
+        Stringbuilder stringbuilder = new Stringbuilder();
+        while ((line = reader.readLine()) != null) {
+            String lineToArray = stringbuilder.padRightWhitespaces(line, numCols);
+            forestMap[row] = lineToArray.toCharArray();
+            row++;
+        }
+        return forestMap;
+    }
+
     @Override
     public int escapeFromTheWoods(Resource resource) throws IOException {
-        //TODO start your journey here
-
         InputStream inputStream = resource.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         BufferedReader reader = new BufferedReader(inputStreamReader);
@@ -54,31 +72,7 @@ public class GameImpl implements Game {
         reader.close();
         inputStreamReader.close();
         inputStream.close();
-        System.out.println("I returned: " + output);
         return output;
-    }
-
-    private static List<int[]> findAllExits(int numRows, int numCols, char[][] forestMap, StartAndExits startAndExits) {
-        List<int[]> exits = startAndExits.findExits(forestMap, numRows, numCols);
-        return exits;
-    }
-
-    private static int[] findStartLocation(char[][] forestMap, StartAndExits startAndExits) {
-        int[] myLocation = startAndExits.findMyLocation(forestMap);
-        return myLocation;
-    }
-
-    private static char[][] create2DForestMap(BufferedReader reader, int numRows, int numCols) throws IOException {
-        String line;
-        char[][] forestMap = new char[numRows][numCols];
-        int row = 0;
-        Stringbuilder stringbuilder = new Stringbuilder();
-        while ((line = reader.readLine()) != null) {
-            String lineToArray = stringbuilder.padRightWhitespaces(line, numCols);
-            forestMap[row] = lineToArray.toCharArray();
-            row++;
-        }
-        return forestMap;
     }
 
 

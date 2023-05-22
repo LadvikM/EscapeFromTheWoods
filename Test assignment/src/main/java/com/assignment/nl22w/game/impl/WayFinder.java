@@ -17,17 +17,15 @@ public class WayFinder {
         int minSteps = 0;
         ArrayList<Integer> steps = new ArrayList<>();
         for (int[] exit : exits) {
-            int stepCount = findShortestPath(forestMap, myLocation, exit);
+            int stepCount = findShortestPathToExit(forestMap, myLocation, exit);
             steps.add(stepCount);
             minSteps = Collections.min(steps);
-
         }
-
         System.out.println("Kõige vähem samme:" + minSteps);
         return minSteps;
     }
 
-    private int findShortestPath(char[][] forestMap, int[] myLocation, int[] exit) {
+    private int findShortestPathToExit(char[][] forestMap, int[] myLocation, int[] exit) {
         //Map size
         int rows = forestMap.length;
         int cols = forestMap[0].length;
@@ -35,8 +33,8 @@ public class WayFinder {
         int exitX = exit[0];
         int exitY = exit[1];
 
-        int rowNum[] = {-1, 0, 0, 1};
-        int colNum[] = {0, -1, 1, 0};
+        int[] rowNum = {-1, 0, 0, 1};
+        int[] colNum = {0, -1, 1, 0};
         boolean[][] visited = new boolean[rows][cols];
         //Mark starting point as visited
         visited[myLocation[0]][myLocation[1]] = true;

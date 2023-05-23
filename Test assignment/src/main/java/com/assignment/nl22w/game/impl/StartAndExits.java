@@ -5,8 +5,7 @@ import java.util.List;
 
 public class StartAndExits {
     public int[] findMyLocation(char[][] forestMap) {
-        int[] start = findStartCoordinates(forestMap);
-        return start;
+        return findStartCoordinates(forestMap);
     }
 
     public List<int[]> findExits(char[][] forestMap, int numRows, int numCols) {
@@ -20,15 +19,16 @@ public class StartAndExits {
     }
 
     private static int[] findStartCoordinates(char[][] forestMap) {
-        int[] start = new int[0];
+
         for (int row = 0; row < forestMap.length; row++) {
             for (int col = 0; col < forestMap[row].length; col++) {
                 if (forestMap[row][col] == 'X') {
-                    start = new int[]{row, col};
+                    return new int[]{row, col};
+
                 }
             }
         }
-        return start;
+        return new int[0];
     }
 
     private static void findExitsOnTopBorder(char[][] forestMap, int numCols, List<int[]> listOfExits) {

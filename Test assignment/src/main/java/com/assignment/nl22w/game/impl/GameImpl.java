@@ -60,11 +60,14 @@ public class GameImpl implements Game {
         char[][] forestMap = create2DForestMap(reader, numRows, numCols);
         StartAndExits startAndExits = new StartAndExits();
         int[] myLocation = findStartLocation(forestMap, startAndExits);
+        if (myLocation.length == 0) {
+            return 0;
+        }
         List<int[]> exits = findAllExits(numRows, numCols, forestMap, startAndExits);
 
         int output;
         if (exits.isEmpty()) {
-            output = 0;
+            return 0;
         } else {
             WayFinder wayFinder = new WayFinder();
             output = wayFinder.findWayOut(forestMap, myLocation, exits);

@@ -72,6 +72,7 @@ public class GameImpl implements Game {
         reader.close();
         inputStreamReader.close();
         inputStream.close();
+        System.out.println("Output is: " + output);
         return output;
     }
 

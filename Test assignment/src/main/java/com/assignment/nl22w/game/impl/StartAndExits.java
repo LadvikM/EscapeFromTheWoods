@@ -3,6 +3,7 @@ package com.assignment.nl22w.game.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class StartAndExits {
     public int[] findMyLocation(char[][] forestMap) {
         return findStartCoordinates(forestMap);

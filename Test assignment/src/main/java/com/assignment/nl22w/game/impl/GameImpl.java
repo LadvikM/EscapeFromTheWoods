@@ -39,6 +39,9 @@ public class GameImpl implements Game {
 
     @Override
     public int escapeFromTheWoods(Resource resource) throws IOException {
+        if (!resource.isReadable()) {
+            return 0;
+        }
         InputStream inputStream = resource.getInputStream();
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         BufferedReader reader = new BufferedReader(inputStreamReader);
@@ -51,13 +54,20 @@ public class GameImpl implements Game {
             }
             numRows++;
         }
+        boolean inLimits = checkForestSize(numRows, numCols);
+        if (!inLimits) {
+            return 0;
+        }
 
         inputStream = resource.getInputStream();
         inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         reader = new BufferedReader(inputStreamReader);
 
-        // Make 2D array
         char[][] forestMap = create2DForestMap(reader, numRows, numCols);
+        reader.close();
+        inputStreamReader.close();
+        inputStream.close();
+
         StartAndExits startAndExits = new StartAndExits();
         int[] myLocation = findStartLocation(forestMap, startAndExits);
         if (myLocation.length == 0) {
@@ -72,11 +82,13 @@ public class GameImpl implements Game {
             WayFinder wayFinder = new WayFinder();
             output = wayFinder.findWayOut(forestMap, myLocation, exits);
         }
-        reader.close();
-        inputStreamReader.close();
-        inputStream.close();
-        System.out.println("Output is: " + output);
+
         return output;
+    }
+
+    public static boolean checkForestSize(int numRows, int numCols) {
+        return numRows >= 5 && numRows <= 11000 && numCols >= 5 && numCols <= 11000;
+
     }
 
 

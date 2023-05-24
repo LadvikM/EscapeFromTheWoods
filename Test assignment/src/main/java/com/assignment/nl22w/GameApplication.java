@@ -13,7 +13,7 @@ public class GameApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(GameApplication.class, args);
-		Resource resource = new ClassPathResource("map7.txt");
+		Resource resource = new ClassPathResource("NoMap.txt");
 		GameImpl game = new GameImpl();
 		game.escapeFromTheWoods(resource);
 

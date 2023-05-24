@@ -25,11 +25,11 @@ public class WayFinder {
 
         boolean[][] visited = new boolean[forestMap.length][forestMap[0].length];
         visited[myLocation[0]][myLocation[1]] = true;
-        Queue<queueContent> coordinatesAndDistances = new LinkedList<>();
-        queueContent start = new queueContent(myLocation[0], myLocation[1], 0);
+        Queue<queueNode> coordinatesAndDistances = new LinkedList<>();
+        queueNode start = new queueNode(myLocation[0], myLocation[1], 0);
         coordinatesAndDistances.add(start);
         while (!coordinatesAndDistances.isEmpty()) {
-            queueContent current = coordinatesAndDistances.peek();
+            queueNode current = coordinatesAndDistances.peek();
             int[] currentCoordinates = {current.x, current.y};
             int stepCount = current.dist;
             if (currentCoordinates[0] == exit[0] && currentCoordinates[1] == exit[1]) {
@@ -41,7 +41,7 @@ public class WayFinder {
         return 0;
     }
 
-    private static void moveToValidAdjacentCell(char[][] forestMap, boolean[][] visited, Queue<queueContent> coordinatesAndDistances, queueContent current) {
+    private static void moveToValidAdjacentCell(char[][] forestMap, boolean[][] visited, Queue<queueNode> coordinatesAndDistances, queueNode current) {
         int[] rowNum = {-1, 0, 0, 1};
         int[] colNum = {0, -1, 1, 0};
         for (int i = 0; i < 4; i++) {
@@ -49,18 +49,18 @@ public class WayFinder {
             int newY = current.y + colNum[i];
             if (isValidMove(newX, newY, forestMap, visited)) {
                 visited[newX][newY] = true;
-                queueContent adjacentCell = new queueContent(newX, newY, current.dist + 1);
+                queueNode adjacentCell = new queueNode(newX, newY, current.dist + 1);
                 coordinatesAndDistances.add(adjacentCell);
             }
         }
     }
 
-    static class queueContent {
+    static class queueNode {
         int x;
         int y;
         int dist;
 
-        public queueContent(int x, int y, int dist) {
+        public queueNode(int x, int y, int dist) {
             this.x = x;
             this.y = y;
             this.dist = dist;

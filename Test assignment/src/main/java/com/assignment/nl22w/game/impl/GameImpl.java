@@ -21,7 +21,7 @@ public class GameImpl implements Game {
     }
 
     private static int[] findStartLocation(char[][] forestMap, StartAndExits startAndExits) {
-        return startAndExits.findMyLocation(forestMap);
+        return startAndExits.findStartCoordinates(forestMap);
     }
 
     private static char[][] create2DForestMap(BufferedReader reader, int numRows, int numCols) throws IOException {
@@ -54,8 +54,8 @@ public class GameImpl implements Game {
             }
             numRows++;
         }
-        boolean inLimits = checkForestSize(numRows, numCols);
-        if (!inLimits) {
+        boolean isInLimits = checkForestSize(numRows, numCols);
+        if (!isInLimits) {
             return 0;
         }
 

@@ -56,6 +56,8 @@ class GameImplTest {
         assertTrue(isInLimits);
 
     }
+
+
     @Test
     void map1ShouldReturn4() throws IOException {
 
@@ -103,6 +105,14 @@ class GameImplTest {
     void map7ShouldReturn0() throws IOException {
 
         Resource resource = new ClassPathResource("map7.txt");
+        GameImpl game = new GameImpl();
+        assertEquals(0,game.escapeFromTheWoods(resource));
+
+    }
+    @Test
+    void map9ShouldReturn0() throws IOException {
+
+        Resource resource = new ClassPathResource("map9.txt");
         GameImpl game = new GameImpl();
         assertEquals(0,game.escapeFromTheWoods(resource));
 

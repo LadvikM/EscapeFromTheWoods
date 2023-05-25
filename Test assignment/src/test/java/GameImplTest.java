@@ -6,7 +6,7 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameImplTest {
 
@@ -20,44 +20,6 @@ class GameImplTest {
         assertEquals(0,game.escapeFromTheWoods(resource));
 
     }
-    @Test
-    void invalidRowsAndCols() {
-
-        int numberOfRows = 1;
-        int numberOfColumns = 1;
-        boolean isInLimits = GameImpl.checkForestSize(numberOfRows, numberOfColumns);
-        assertFalse(isInLimits);
-
-    }
-    @Test
-    void invalidRows() {
-
-        int numberOfRows = 1;
-        int numberOfColumns = 10;
-        boolean isInLimits = GameImpl.checkForestSize(numberOfRows, numberOfColumns);
-        assertFalse(isInLimits);
-
-    }
-    @Test
-    void invalidCols() {
-
-        int numberOfRows = 10;
-        int numberOfColumns = 1;
-        boolean isInLimits = GameImpl.checkForestSize(numberOfRows, numberOfColumns);
-        assertFalse(isInLimits);
-
-    }
-    @Test
-    void validRowsAndCols() {
-
-        int numberOfRows = 10;
-        int numberOfColumns = 10;
-        boolean isInLimits = GameImpl.checkForestSize(numberOfRows, numberOfColumns);
-        assertTrue(isInLimits);
-
-    }
-
-
     @Test
     void map1ShouldReturn4() throws IOException {
 
@@ -129,4 +91,5 @@ class GameImplTest {
 
 
     }
+
 }

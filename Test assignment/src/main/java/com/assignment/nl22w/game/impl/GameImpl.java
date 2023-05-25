@@ -37,6 +37,7 @@ public class GameImpl implements Game {
         return forestMap;
     }
 
+
     @Override
     public int escapeFromTheWoods(Resource resource) throws IOException {
         if (!resource.isReadable()) {
@@ -54,10 +55,7 @@ public class GameImpl implements Game {
             }
             numRows++;
         }
-        boolean isInLimits = checkForestSize(numRows, numCols);
-        if (!isInLimits) {
-            return 0;
-        }
+
 
         inputStream = resource.getInputStream();
         inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
@@ -67,28 +65,25 @@ public class GameImpl implements Game {
         reader.close();
         inputStreamReader.close();
         inputStream.close();
-
         StartAndExits startAndExits = new StartAndExits();
         int[] myLocation = findStartLocation(forestMap, startAndExits);
         if (myLocation.length == 0) {
             return 0;
         }
-        List<int[]> exits = findAllExits(numRows, numCols, forestMap, startAndExits);
-
-        int output;
-        if (exits.isEmpty()) {
+        boolean isInLimits = startAndExits.checkForestSize(numRows, numCols);
+        if (!isInLimits) {
             return 0;
-        } else {
-            WayFinder wayFinder = new WayFinder();
-            output = wayFinder.findWayOut(forestMap, myLocation, exits);
         }
 
+        List<int[]> exits = findAllExits(numRows, numCols, forestMap, startAndExits);
+        boolean inLimits = startAndExits.isInLimits(exits);
+        if (!inLimits) {
+            return 0;
+        }
+        int output;
+        WayFinder wayFinder = new WayFinder();
+        output = wayFinder.findWayOut(forestMap, myLocation, exits);
         return output;
-    }
-
-    public static boolean checkForestSize(int numRows, int numCols) {
-        return numRows >= 5 && numRows <= 11000 && numCols >= 5 && numCols <= 11000;
-
     }
 
 

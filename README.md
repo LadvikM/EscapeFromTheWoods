@@ -1,5 +1,5 @@
 # EscapeFromTheWoods
-Nortal Test Assignment
+Test Assignment
 
 ### The escape from the woods
 
